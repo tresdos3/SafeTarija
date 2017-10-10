@@ -46,6 +46,7 @@ dependencies {
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.github.paolorotolo:appintro:v4.1.0'
+    compile 'com.github.karanchuri:PermissionManager:0.1.0'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -15,7 +15,6 @@ public class IntroHActivity extends AppIntro {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro_h);
         addSlide(AppIntroFragment.newInstance("Rapida...",
                 "Selecciona a unos de tus hijos",
                 R.drawable.selecciona,
@@ -31,10 +30,8 @@ public class IntroHActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance("Cuida...",
                 "a tus seres queridos",
                 R.drawable.fami,
-                Color.parseColor("#ffffff")));
+                Color.parseColor("#f39c12")));
         showStatusBar(false);
-        setBarColor(Color.parseColor("#f39c12"));
-        setSeparatorColor(Color.parseColor("#f39c12"));
     }
 
     @Override
