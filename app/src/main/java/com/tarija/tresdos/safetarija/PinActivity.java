@@ -67,7 +67,7 @@ public class PinActivity extends AppCompatActivity {
                             finish();
                         }
                         else {
-                            MDToast mdToast = MDToast.makeText(getApplicationContext(), "Los pin no son iguales", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS);
+                            MDToast mdToast = MDToast.makeText(getApplicationContext(), "Los pin no son iguales", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR);
                             mdToast.show();
                             final Intent intent = getIntent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
