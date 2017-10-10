@@ -1,4 +1,4 @@
-package com.tarija.tresdos.safetarija;
+package com.tarija.tresdos.safetarija.other;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -18,7 +18,7 @@ public class PolicyManager {
 		mDPM = (DevicePolicyManager) mContext
 				.getSystemService(Context.DEVICE_POLICY_SERVICE);
 		adminComponent = new ComponentName(mContext.getPackageName(),
-				mContext.getPackageName() + ".SampleDeviceAdminReceiver");
+				mContext.getPackageName() + ".receiver.DeviceAdminReceiver");
 	}
 
 	public boolean isAdminActive() {

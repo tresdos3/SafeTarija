@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
+import com.tarija.tresdos.safetarija.other.PolicyManager;
 
 import java.util.Map;
 
@@ -50,11 +51,8 @@ public class DashboardHActivity extends AppCompatActivity {
     String device_unique_id,IMEI;
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
     public  static final int RequestPermissionCode  = 1 ;
-
-    //    varibles sharedpreferences
     public static final String mypreference = "mypref";
     public static  final String NombreHIJO = "Nombrehijo";
-    //    tipo p=padre h=hijo n=ninguno
     public static final String Tipo = "tipoKey";
     public static final String Session = "SessionKey";
     public static final String Huid = "HuidKey";
@@ -123,15 +121,15 @@ public class DashboardHActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                iniciarServicio();
                 AdminDevice();
-//                loadIMEI();
-//                if (sharedpreferences.contains(NombreHIJO)) {
-//                    String t = sharedpreferences.getString(NombreHIJO, "");
-//                    Toast.makeText(DashboardHActivity.this, "ES: "+ t, Toast.LENGTH_SHORT).show();
-//                }
-//                Intent i = new Intent(DashboardHActivity.this, PinActivity.class);
-////                finish();
-////                startActivity(i);
-//                startActivityForResult(i,4);
+                loadIMEI();
+                if (sharedpreferences.contains(NombreHIJO)) {
+                    String t = sharedpreferences.getString(NombreHIJO, "");
+                    Toast.makeText(DashboardHActivity.this, "ES: "+ t, Toast.LENGTH_SHORT).show();
+                }
+                Intent i = new Intent(DashboardHActivity.this, PinActivity.class);
+//                finish();
+//                startActivity(i);
+                startActivityForResult(i,4);
             }
         });
 
@@ -146,7 +144,7 @@ public class DashboardHActivity extends AppCompatActivity {
                     policyManager.getAdminComponent());
             activateDeviceAdmin
                     .putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                            "After activating admin, you will be able to block application uninstallation.");
+                            "Despues de activar esta funcion, la aplicacion no podra ser disinstalada");
             startActivityForResult(activateDeviceAdmin,
                     PolicyManager.DPM_ACTIVATION_REQUEST_CODE);
         }
@@ -166,9 +164,6 @@ public class DashboardHActivity extends AppCompatActivity {
         }
     }
     private void cargarDatos(final String texto, String uid) {
-        //        este es el id de registro
-
-
         HijosRef = rootRef.child(uid).child("hijos").child(texto);
         HijosRef.addValueEventListener(new ValueEventListener() {
             SharedPreferences.Editor editor = sharedpreferences.edit();

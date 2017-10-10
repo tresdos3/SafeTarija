@@ -47,7 +47,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".SampleDeviceAdminReceiver"
+            android:name=".receiver.DeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
