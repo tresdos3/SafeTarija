@@ -36,27 +36,27 @@
             android:background="@drawable/profile_back">
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/NombreUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="68dp"
                 android:layout_marginBottom="8dp"
-                android:text="Marian Hart"
+                android:text=""
                 android:textSize="24sp"
                 android:textColor="@android:color/black"
                 android:fontFamily="sans-serif"/>
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/EmailUser"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/tvName"
+                android:layout_below="@id/NombreUser"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:lines="2"
-                android:text="Director of Project Management at GoldenPhase Solar"
+                android:text=""
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"/>
 
@@ -65,9 +65,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/tvTitle"
+                android:layout_below="@id/EmailUser"
                 android:layout_marginBottom="4dp"
-                android:text="Syracuse University - New York"
+                android:text="Tarija - Bolivia"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-light"/>
 
@@ -78,7 +78,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/tvEducation"
                 android:layout_marginBottom="16dp"
-                android:text="Greater San Diego Area . 500"
+                android:text="200 años de libertad"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-light"/>
 
@@ -103,8 +103,8 @@
                 android:paddingEnd="10dp"
                 android:background="@drawable/message_button"
                 android:textColor="@color/colorButton"
-                android:text="message"
-                android:textSize="16sp"
+                android:text="Emergencias"
+                android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"/>
 
             <Button
@@ -120,7 +120,7 @@
                 android:paddingEnd="10dp"
                 android:background="@drawable/connect_button"
                 android:textColor="@android:color/white"
-                android:text="connect"
+                android:text="Chat"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"/>
 
@@ -133,7 +133,7 @@
                 android:gravity="center"
                 android:lines="2"
                 android:ellipsize="end"
-                android:text="I'm a renewable energy executive with 10 years of experience, and have built strong skills in getting companies"
+                android:text="Esta aplicacion fue desarrollada con fines educativos usela con responsabilidad"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"/>
         </RelativeLayout>
