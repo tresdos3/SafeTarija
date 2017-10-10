@@ -1,10 +1,11 @@
-package com.tarija.tresdos.safetarija.receiver;
+package com.tarija.tresdos.safetarija;
 
+import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
+public class SampleDeviceAdminReceiver extends DeviceAdminReceiver {
 
 	@Override
 	public void onDisabled(Context context, Intent intent) {

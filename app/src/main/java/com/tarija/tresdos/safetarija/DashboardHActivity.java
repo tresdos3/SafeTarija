@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
-import com.tarija.tresdos.safetarija.receiver.PolicyManager;
 
 import java.util.Map;
 
@@ -138,6 +137,7 @@ public class DashboardHActivity extends AppCompatActivity {
 
     }
     private  void AdminDevice(){
+//
         if (!policyManager.isAdminActive()) {
             Intent activateDeviceAdmin = new Intent(
                     DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
@@ -146,7 +146,7 @@ public class DashboardHActivity extends AppCompatActivity {
                     policyManager.getAdminComponent());
             activateDeviceAdmin
                     .putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                            "Necesita activar esto para evitar que la aplicacion sea desintalada");
+                            "After activating admin, you will be able to block application uninstallation.");
             startActivityForResult(activateDeviceAdmin,
                     PolicyManager.DPM_ACTIVATION_REQUEST_CODE);
         }
