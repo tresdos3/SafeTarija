@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Safe Tarija</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add_favourite">Add to Favourites</string>
+    <string name="action_play_next">Play Next</string>
+    <string name="backdrop_title">Safe Tarija</string>
+    <string name="backdrop_subtitle">Tarija - Bolivia</string>
+    <string name="title_activity_rastreo">Map</string>
+    <string name="title_activity_tarija_capital">TarijaCapitalActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

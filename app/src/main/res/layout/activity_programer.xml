@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.tarija.tresdos.safetarija.ProgramerActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginTop="22dp"
+        app:srcCompat="@drawable/login"
+        android:layout_below="@+id/aboutTitle"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        app:srcCompat="@drawable/logomunicipio"
+        android:layout_alignTop="@+id/imageView5"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_marginStart="70dp" />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        app:srcCompat="@drawable/logomunicipio"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/aboutDescripcion"
+        android:layout_alignStart="@+id/aboutTitle" />
+
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="75dp"
+        android:layout_marginTop="37dp"
+        android:textSize="60px"
+        android:text="Safe Tarija" />
+
+    <TextView
+        android:id="@+id/aboutDescripcion"
+        android:layout_width="500px"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam urna quam, molestie eu cursus vel, auctor eget justo. Donec efficitur efficitur neque vel tempus. Sed ut sem ac urna maximus sodales. Donec id sem sem. Nunc et dui in neque mattis sagittis. Vivamus sit amet mollis ante. Nunc feugiat mollis lacus. Nullam tempor felis nunc, semper "
+        android:textSize="20px"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/aboutCiudad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Tarija - Bolivia"
+        android:textSize="30px"
+        android:layout_below="@+id/imageView4"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

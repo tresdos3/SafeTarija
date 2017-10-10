@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The background image of Tokyo we will use -->
+    <item android:height="240dp">
+        <bitmap
+            android:src="@drawable/bolivia" />
+    </item>
+    <item android:height="240dp">
+        <shape
+            android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@android:color/transparent"
+                android:endColor="@android:color/white">
+            </gradient>
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tarija.tresdos.safetarija.RastreoActivity">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/fbutton_color_orange">
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicacion actual de su hijo"
+                android:textColor="@android:color/white"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_gravity="left"
+                />
+        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#8c000000"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="Selecciona tu direccion.."
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_alignParentStart="true" />
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/result"
+            tools:context="com.tarija.tresdos.safetarija.RastreoActivity" />
+        <Button
+            android:id="@+id/btnPedir"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:text="Enviar Mensaje"
+            android:layout_alignParentEnd="true"
+            android:background="@color/fbutton_color_orange"
+            android:textColor="#ffffff"
+            android:layout_alignParentBottom="true" />
+</RelativeLayout>

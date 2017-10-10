@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fbutton_color_orange"
+    tools:context="com.tarija.tresdos.safetarija.SelecHijoActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="70px"
+        android:id="@+id/relativeLayout3">
+
+        <TextView
+            android:text="Selecciona un hijo que este registrado:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleSelec"
+            android:textSize="15sp"
+            android:layout_marginTop="214dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/ListaHijos"
+            android:layout_width="550px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/titleSelec"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSeleccionar"
+            android:layout_width="450px"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Seleccionar"
+            android:background="#ffffff"
+            android:textColor="@color/fbutton_color_orange"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/ListaHijos"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:srcCompat="@drawable/login"
+        android:layout_alignTop="@+id/relativeLayout3"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
