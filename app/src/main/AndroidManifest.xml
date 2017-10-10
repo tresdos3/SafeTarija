@@ -77,7 +77,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ProgramerActivity" />
         <activity android:name=".SelecHijoActivity" />
-        <activity android:name=".DashboardHActivity"></activity>
+        <activity android:name=".DashboardHActivity" />
+        <activity android:name=".IntroHActivity"></activity>
     </application>
 
 </manifest>

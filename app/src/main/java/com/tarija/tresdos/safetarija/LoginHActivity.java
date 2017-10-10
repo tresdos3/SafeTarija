@@ -69,7 +69,7 @@ public class LoginHActivity extends AppCompatActivity {
                         else{
                             contenedor.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
-                            Intent i = new Intent(LoginHActivity.this, SelecHijoActivity.class);
+                            Intent i = new Intent(LoginHActivity.this, IntroHActivity.class);
                             finish();
                             startActivity(i);
                         }
