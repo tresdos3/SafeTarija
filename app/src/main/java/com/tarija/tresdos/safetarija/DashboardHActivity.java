@@ -124,7 +124,6 @@ public class DashboardHActivity extends AppCompatActivity {
                 loadIMEI();
                 if (sharedpreferences.contains(NombreHIJO)) {
                     String t = sharedpreferences.getString(NombreHIJO, "");
-                    Toast.makeText(DashboardHActivity.this, "ES: "+ t, Toast.LENGTH_SHORT).show();
                 }
                 Intent i = new Intent(DashboardHActivity.this, PinActivity.class);
 //                finish();
