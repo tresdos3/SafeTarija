@@ -254,25 +254,6 @@ public class DashboardPActivity extends AppCompatActivity implements GoogleApiCl
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
     public void logOut(View view) {
-//        Notification notification = new Notification("Titulo","Esto ess un body");
-//        sender sender = new sender(common.fcmtoken, notification);
-//        mService.SendNotification(sender)
-//                .enqueue(new Callback<myreponse>() {
-//                    @Override
-//                    public void onResponse(Call<myreponse> call, Response<myreponse> response) {
-//                        if (response.body().success == 1){
-//                            Toast.makeText(DashboardPActivity.this, "Funciona", Toast.LENGTH_LONG).show();
-//                        }
-//                        else{
-//                            Toast.makeText(DashboardPActivity.this, "No Funciona", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<myreponse> call, Throwable t) {
-//
-//                    }
-//                });
         firebaseAuth.signOut();
 
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
