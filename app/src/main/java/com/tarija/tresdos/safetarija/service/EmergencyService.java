@@ -145,67 +145,41 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
     public void onDestroy() {
         Process.killProcess(Process.myPid());
     }
-    public void EnviarNot(String TokenPadre){
+    public void EnviarNot(final String TokenPadre){
         String texto = sharedpreferences.getString(Huid,"");
-        Notification notification = new Notification(texto,"Esto ess un body");
-        sender sender = new sender(TokenPadre, notification);
-        mService.SendNotification(sender)
-                .enqueue(new Callback<myreponse>() {
-                    @Override
-                    public void onResponse(Call<myreponse> call, Response<myreponse> response) {
-                        if (response.body().success == 1){
-                            showNotification("Tus familiares seran notificados");
-                        }
-                        else{
-                            showNotification("Error...");
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<myreponse> call, Throwable t) {
+        FirebaseUser user = auth.getCurrentUser();
+        rootRef.child(user.getUid()).child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String NombreH = dataSnapshot.getValue(String.class);
+                Notification notification = new Notification("Safe Tarija",NombreH +" ha activado una alerta");
+                sender sender = new sender(TokenPadre, notification);
+                mService.SendNotification(sender)
+                        .enqueue(new Callback<myreponse>() {
+                            @Override
+                            public void onResponse(Call<myreponse> call, Response<myreponse> response) {
+                                if (response.body().success == 1){
+                                    showNotification("Tus familiares seran notificados");
+                                }
+                                else{
+                                    showNotification("Error...");
+                                }
+                            }
 
-                    }
-                });
-    }
-private void fn_getlocation(){
-    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-    }
-    locationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
-    isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-    isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                            @Override
+                            public void onFailure(Call<myreponse> call, Throwable t) {
 
-    if (!isGPSEnable && !isNetworkEnable){
-
-    }else {
-        if (isGPSEnable){
-            location = null;
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,0,this);
-            if (locationManager!=null){
-                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location!=null){
-                    Log.d("latitude2",location.getLatitude()+"");
-                    Log.d("longitude2",location.getLongitude()+"");
-                    auth = FirebaseAuth.getInstance();
-                    FirebaseUser user = auth.getCurrentUser();
-                    rootRef = FirebaseDatabase.getInstance().getReference();
-                    HijosRef = rootRef.child(user.getUid());
-                    String texto = sharedpreferences.getString(Huid,"");
-                    HijosRef.child("hijos").child(texto).child("emergencia").child("latitud").setValue(location.getLatitude());
-                    HijosRef.child("hijos").child(texto).child("emergencia").child("longitud").setValue(location.getLongitude());
-                    HijosRef.child("hijos").child(texto).child("alerta").setValue("si");
-                    HijosRef.child("hijos").child(texto).child("fecha").setValue(new Date().toString());
-                    latitude = location.getLatitude();
-                    Log.d("DatosL", "fn_getlocation: " + location.getLatitude());
-                    longitude = location.getLongitude();
-                    Log.d("DatosL", "fn_getlocation: " + location.getLongitude());
-                }
+                            }
+                        });
             }
-        }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
     }
-
-}
 //    endregion
 
     @Override
