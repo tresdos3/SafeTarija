@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -30,15 +31,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
+import com.tarija.tresdos.safetarija.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class DashboardHActivity extends AppCompatActivity {
 
+
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    private LocationManager lm;
     private View photoheader;
     private FloatingActionButton btnPattner;
     private ImageView btnLogout;
@@ -67,7 +78,7 @@ public class DashboardHActivity extends AppCompatActivity {
         policyManager = new PolicyManager(this);
 
         auth = FirebaseAuth.getInstance();
-
+        lm = (LocationManager) this.getSystemService(this.LOCATION_SERVICE);
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
         photoheader = (View) findViewById(R.id.photoHeader);
@@ -81,6 +92,22 @@ public class DashboardHActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             photoheader.setTranslationZ(6);
             photoheader.invalidate();
+        }
+        if (!activarGps()){
+            mensaje();
+        }
+        else{
+            permissions.add(ACCESS_FINE_LOCATION);
+            permissions.add(ACCESS_COARSE_LOCATION);
+            permissionsToRequest = findUnAskedPermissions(permissions);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+                if (permissionsToRequest.size() > 0)
+                    requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+            }
+            Intent intentGeo = new Intent(DashboardHActivity.this, LocationService.class);
+            startService(intentGeo);
         }
         rootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -133,6 +160,61 @@ public class DashboardHActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void mensaje(){
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Atencion...")
+                .setContentText("Necesitas activar el Gps")
+                .setConfirmText("Activar")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                })
+                .setCancelText("Cancelar")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        System.exit(0);
+                    }
+                })
+                .show();
+    }
+    private boolean activarGps(){
+        boolean bandera;
+        if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            bandera = false;
+        }
+        else{
+            bandera = true;
+        }
+        return bandera;
+    }
+    private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
     private  void AdminDevice(){
 //
@@ -230,8 +312,8 @@ public class DashboardHActivity extends AppCompatActivity {
         }
     }
     private void iniciarServicio(){
-//        Intent intentGeo = new Intent(this, TrackService.class);
-//        startService(intentGeo);
+        Intent intentGeo = new Intent(this, LocationService.class);
+        startService(intentGeo);
 //        Intent intentBrowser = new Intent(this, BrowserService.class);
 //        startService(intentBrowser);
 //        Intent intentEmer = new Intent(this, EmergencyService.class);
@@ -244,8 +326,8 @@ public class DashboardHActivity extends AppCompatActivity {
 //        startService(intentInternet);
     }
     private void cerrarServicio(){
-//        Intent intentGeo = new Intent(this, TrackService.class);
-//        this.stopService(intentGeo);
+        Intent intentGeo = new Intent(this, LocationService.class);
+        this.stopService(intentGeo);
 //        Intent intentEmer = new Intent(this, EmergencyService.class);
 //        this.stopService(intentEmer);
 //        Intent intentInternet = new Intent(this, ContactsService.class);
