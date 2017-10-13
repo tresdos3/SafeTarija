@@ -8,7 +8,7 @@ import java.util.List;
 
 public class myreponse {
     private long multicast_id;
-    private int success;
+    public int success;
     private int failure;
     private int canonical_ids;
     private List<Result> results;

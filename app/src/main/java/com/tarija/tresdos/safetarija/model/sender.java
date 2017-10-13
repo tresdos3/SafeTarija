@@ -5,6 +5,30 @@ package com.tarija.tresdos.safetarija.model;
  */
 
 public class sender {
-    public String to;
-    public Notification notification;
+    private String to;
+    private Notification notification;
+
+    public sender() {
+    }
+
+    public sender(String to, Notification notification) {
+        this.setTo(to);
+        this.setNotification(notification);
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
 }
