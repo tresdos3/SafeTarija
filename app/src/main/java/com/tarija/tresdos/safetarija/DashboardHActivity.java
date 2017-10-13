@@ -93,22 +93,22 @@ public class DashboardHActivity extends AppCompatActivity {
             photoheader.setTranslationZ(6);
             photoheader.invalidate();
         }
-        if (!activarGps()){
-            mensaje();
-        }
-        else{
-            permissions.add(ACCESS_FINE_LOCATION);
-            permissions.add(ACCESS_COARSE_LOCATION);
-            permissionsToRequest = findUnAskedPermissions(permissions);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-
-                if (permissionsToRequest.size() > 0)
-                    requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
-            }
-            Intent intentGeo = new Intent(DashboardHActivity.this, LocationService.class);
-            startService(intentGeo);
-        }
+//        if (!activarGps()){
+//            mensaje();
+//        }
+//        else{
+//            permissions.add(ACCESS_FINE_LOCATION);
+//            permissions.add(ACCESS_COARSE_LOCATION);
+//            permissionsToRequest = findUnAskedPermissions(permissions);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//
+//
+//                if (permissionsToRequest.size() > 0)
+//                    requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+//            }
+//            Intent intentGeo = new Intent(DashboardHActivity.this, LocationService.class);
+//            startService(intentGeo);
+//        }
         rootRef = FirebaseDatabase.getInstance().getReference();
 
 
