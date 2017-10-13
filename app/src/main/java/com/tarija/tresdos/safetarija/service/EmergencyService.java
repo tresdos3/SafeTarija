@@ -146,7 +146,8 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
         Process.killProcess(Process.myPid());
     }
     public void EnviarNot(String TokenPadre){
-        Notification notification = new Notification("Titulo","Esto ess un body");
+        String texto = sharedpreferences.getString(Huid,"");
+        Notification notification = new Notification(texto,"Esto ess un body");
         sender sender = new sender(TokenPadre, notification);
         mService.SendNotification(sender)
                 .enqueue(new Callback<myreponse>() {
