@@ -27,67 +27,39 @@ import java.util.Date;
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, ILocationConstants, IPreferenceConstants {
 
-
-    private DatabaseReference rootRef, URLRef, URLREF_IMG, URL_TOKEN, URL_UBICACION;
     private FirebaseAuth firebaseAuth;
-
     private static final String TAG = LocationService.class.getSimpleName();
-
     private long UPDATE_INTERVAL = 5000;  /* 15 secs */
     private long FASTEST_INTERVAL = 5000; /* 5 secs */
-
     protected GoogleApiClient mGoogleApiClient;
-
-    /**
-     * Stores parameters for requests to the FusedLocationProviderApi.
-     */
     protected LocationRequest mLocationRequest;
-
-    /**
-     * Represents a geographical location.
-     */
     protected Location mCurrentLocation;
-
-
     private String mLatitudeLabel;
     private String mLongitudeLabel;
     private String mLastUpdateTimeLabel;
     private String mDistance;
-
-
-    /**
-     * Time when the location was updated represented as a String.
-     */
     protected String mLastUpdateTime;
-
     private Location oldLocation;
-
     private Location newLocation;
-
-
     private AppPreferences appPreferences;
-
-    /**
-     * Total distance covered
-     */
     private float distance;
 
+    private DatabaseReference rootRef,HijosRef;
+    private FirebaseAuth auth;
+    public static final String mypreference = "mypref";
+    public static final String Huid = "HuidKey";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         appPreferences = new AppPreferences(this);
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        firebaseAuth = FirebaseAuth.getInstance();
-        URL_UBICACION = rootRef.child("choferes/");
+        HijosRef = rootRef.child(user.getUid());
         oldLocation = new Location("Point A");
         newLocation = new Location("Point B");
-
-//        mLatitudeLabel = getString(R.string.latitude_label);
-//        mLongitudeLabel = getString(R.string.longitude_label);
-//        mLastUpdateTimeLabel = getString(R.string.last_update_time_label);
-//        mDistance = getString(R.string.distance);
 
         mLastUpdateTime = "";
 
