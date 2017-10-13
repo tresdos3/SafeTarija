@@ -30,12 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
-import com.tarija.tresdos.safetarija.services.BrowserService;
-import com.tarija.tresdos.safetarija.services.ContactsService;
-import com.tarija.tresdos.safetarija.services.DetectAppService;
-import com.tarija.tresdos.safetarija.services.EmergencyService;
-import com.tarija.tresdos.safetarija.services.PermisosService;
-import com.tarija.tresdos.safetarija.services.geoService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.Map;
@@ -126,7 +120,7 @@ public class DashboardHActivity extends AppCompatActivity {
         btnPattner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iniciarServicio();
+//                iniciarServicio();
                 loadIMEI();
                 if (sharedpreferences.contains(NombreHIJO)) {
                     String t = sharedpreferences.getString(NombreHIJO, "");
@@ -235,34 +229,34 @@ public class DashboardHActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void iniciarServicio(){
-        Intent intentGeo = new Intent(this, geoService.class);
-        startService(intentGeo);
-        Intent intentBrowser = new Intent(this, BrowserService.class);
-        startService(intentBrowser);
-        Intent intentEmer = new Intent(this, EmergencyService.class);
-        startService(intentEmer);
-        Intent intent = new Intent(this, PermisosService.class);
-        startService(intent);
-        Intent intentApps = new Intent(this, DetectAppService.class);
-        startService(intentApps);
-        Intent intentInternet = new Intent(this, ContactsService.class);
-        startService(intentInternet);
-    }
-    private void cerrarServicio(){
-        Intent intentGeo = new Intent(this, geoService.class);
-        this.stopService(intentGeo);
-        Intent intentEmer = new Intent(this, EmergencyService.class);
-        this.stopService(intentEmer);
-        Intent intentInternet = new Intent(this, ContactsService.class);
-        this.stopService(intentInternet);
-        Intent intent = new Intent(this, PermisosService.class);
-        this.stopService(intent);
-        Intent intentApps = new Intent(this, DetectAppService.class);
-        this.stopService(intentApps);
-        Intent intentBrowser = new Intent(this, BrowserService.class);
-        this.stopService(intentBrowser);
-    }
+//    private void iniciarServicio(){
+//        Intent intentGeo = new Intent(this, geoService.class);
+//        startService(intentGeo);
+//        Intent intentBrowser = new Intent(this, BrowserService.class);
+//        startService(intentBrowser);
+//        Intent intentEmer = new Intent(this, EmergencyService.class);
+//        startService(intentEmer);
+//        Intent intent = new Intent(this, PermisosService.class);
+//        startService(intent);
+//        Intent intentApps = new Intent(this, DetectAppService.class);
+//        startService(intentApps);
+//        Intent intentInternet = new Intent(this, ContactsService.class);
+//        startService(intentInternet);
+//    }
+//    private void cerrarServicio(){
+//        Intent intentGeo = new Intent(this, geoService.class);
+//        this.stopService(intentGeo);
+//        Intent intentEmer = new Intent(this, EmergencyService.class);
+//        this.stopService(intentEmer);
+//        Intent intentInternet = new Intent(this, ContactsService.class);
+//        this.stopService(intentInternet);
+//        Intent intent = new Intent(this, PermisosService.class);
+//        this.stopService(intent);
+//        Intent intentApps = new Intent(this, DetectAppService.class);
+//        this.stopService(intentApps);
+//        Intent intentBrowser = new Intent(this, BrowserService.class);
+//        this.stopService(intentBrowser);
+//    }
     private void Alerta(){
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Atencion...")
@@ -294,7 +288,7 @@ public class DashboardHActivity extends AppCompatActivity {
             String message=data.getStringExtra("MESSAGE");
             Mensaje = message;
             if (Mensaje.equals("true")){
-                cerrarServicio();
+//                cerrarServicio();
                 auth.signOut();
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString(Tipo, "n");
