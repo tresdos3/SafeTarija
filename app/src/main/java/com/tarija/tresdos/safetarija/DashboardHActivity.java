@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
-import com.tarija.tresdos.safetarija.service.TrackService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.Map;
@@ -231,8 +230,8 @@ public class DashboardHActivity extends AppCompatActivity {
         }
     }
     private void iniciarServicio(){
-        Intent intentGeo = new Intent(this, TrackService.class);
-        startService(intentGeo);
+//        Intent intentGeo = new Intent(this, TrackService.class);
+//        startService(intentGeo);
 //        Intent intentBrowser = new Intent(this, BrowserService.class);
 //        startService(intentBrowser);
 //        Intent intentEmer = new Intent(this, EmergencyService.class);
@@ -245,8 +244,8 @@ public class DashboardHActivity extends AppCompatActivity {
 //        startService(intentInternet);
     }
     private void cerrarServicio(){
-        Intent intentGeo = new Intent(this, TrackService.class);
-        this.stopService(intentGeo);
+//        Intent intentGeo = new Intent(this, TrackService.class);
+//        this.stopService(intentGeo);
 //        Intent intentEmer = new Intent(this, EmergencyService.class);
 //        this.stopService(intentEmer);
 //        Intent intentInternet = new Intent(this, ContactsService.class);
