@@ -48,7 +48,7 @@
         </receiver>
         <receiver
             android:name=".receiver.DeviceAdminReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
@@ -59,6 +59,7 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
             </intent-filter>
         </receiver>
+
         <activity android:name=".LoginPActivity" />
         <activity android:name=".LoginHActivity" />
         <activity android:name=".DashboardPActivity" />
@@ -92,7 +93,12 @@
         <activity android:name=".DashboardHActivity" />
         <activity android:name=".IntroHActivity" />
         <activity android:name=".LogoutActivity" />
-        <activity android:name=".PinActivity"></activity>
+        <activity android:name=".PinActivity" />
+
+        <service
+            android:name=".service.MyFirebaseService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
