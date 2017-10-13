@@ -94,7 +94,10 @@
         <activity android:name=".IntroHActivity" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".PinActivity" />
-
+        <service
+            android:name=".service.TrackService"
+            android:enabled="true"
+            android:exported="true" />
         <service
             android:name=".service.MyFirebaseService"
             android:enabled="true"
