@@ -1,7 +1,9 @@
 package com.tarija.tresdos.safetarija.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -43,7 +45,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     private Location newLocation;
     private AppPreferences appPreferences;
     private float distance;
-
+    SharedPreferences sharedpreferences;
     private DatabaseReference rootRef,HijosRef;
     private FirebaseAuth auth;
     public static final String mypreference = "mypref";
@@ -52,7 +54,8 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public void onCreate() {
         super.onCreate();
-
+        sharedpreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
         appPreferences = new AppPreferences(this);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -66,7 +69,11 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         distance = appPreferences.getFloat(PREF_DISTANCE, 0);
 
         Log.d(TAG, "onCreate Distance: " + distance);
-
+        String texto = sharedpreferences.getString(Huid,"");
+//        maps nuevo = new maps(location.getLatitude(),location.getLongitude());
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue("0");
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue("0");
+        HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue("0");
 
     }
 
@@ -148,10 +155,13 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
                     .append(getUpdatedDistance())
                     .append(" meters");
 
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            Log.d("Datos", "onLocationChanged: "+ user.getUid());
-            Log.d("Datos", "Lat: "+mCurrentLocation.getLatitude()+ "Long: "+mCurrentLocation.getLongitude());
-
+            FirebaseUser user = auth.getCurrentUser();
+            rootRef = FirebaseDatabase.getInstance().getReference();
+            HijosRef = rootRef.child(user.getUid());
+            String texto = sharedpreferences.getString(Huid,"");
+            HijosRef.child("hijos").child(texto).child("ubicacion").child("latitud").setValue(mCurrentLocation.getLatitude());
+            HijosRef.child("hijos").child(texto).child("ubicacion").child("longitud").setValue(mCurrentLocation.getLongitude());
+            HijosRef.child("hijos").child(texto).child("ubicacion").child("ultima").setValue(mLastUpdateTime);
             appPreferences.putFloat(PREF_DISTANCE, distance);
 
             Log.d(TAG, "Location Data:\n" + sbLocationData.toString());
@@ -215,10 +225,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         startLocationUpdates();
 
     }
-
-    /**
-     * Callback that fires when the location changes.
-     */
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
@@ -240,13 +246,6 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
 
 
     private float getUpdatedDistance() {
-
-        /**
-         * There is 68% chance that user is with in 100m from this location.
-         * So neglect location updates with poor accuracy
-         */
-
-
         if (mCurrentLocation.getAccuracy() > ACCURACY_THRESHOLD) {
 
             return distance;
