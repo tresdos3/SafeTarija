@@ -37,6 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BrowserService extends Service {
+    private Context mContext;
     private BrowserProvider browserProvider;
     private List<Bookmark> bookmarks;
     private List<Search> searches;
@@ -52,7 +53,8 @@ public class BrowserService extends Service {
     public static final String Huid = "HuidKey";
     ApiService mService;
 
-    public BrowserService() {
+    public BrowserService(Context context) {
+        this.mContext = context;
     }
 
     @Override
@@ -152,10 +154,10 @@ public class BrowserService extends Service {
                             @Override
                             public void onResponse(Call<myreponse> call, Response<myreponse> response) {
                                 if (response.body().success == 1){
-
+                                    Toast.makeText(mContext, "Has Buscaste Un Sitio Prohibido",Toast.LENGTH_LONG).show();
                                 }
                                 else{
-
+                                    Log.d("Error", "Error");
                                 }
                             }
 
