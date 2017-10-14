@@ -119,6 +119,10 @@
             android:name=".service.BrowserService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".service.DetectAppService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

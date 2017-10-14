@@ -33,6 +33,7 @@ import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
 import com.tarija.tresdos.safetarija.service.BrowserService;
 import com.tarija.tresdos.safetarija.service.ContactsService;
+import com.tarija.tresdos.safetarija.service.DetectAppService;
 import com.tarija.tresdos.safetarija.service.EmergencyService;
 import com.tarija.tresdos.safetarija.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
@@ -323,8 +324,8 @@ public class DashboardHActivity extends AppCompatActivity {
         startService(intentEmer);
 //        Intent intent = new Intent(this, PermisosService.class);
 //        startService(intent);
-//        Intent intentApps = new Intent(this, DetectAppService.class);
-//        startService(intentApps);
+        Intent intentApps = new Intent(this, DetectAppService.class);
+        startService(intentApps);
         Intent intentInternet = new Intent(this, ContactsService.class);
         startService(intentInternet);
     }
@@ -337,8 +338,8 @@ public class DashboardHActivity extends AppCompatActivity {
         this.stopService(intentInternet);
 //        Intent intent = new Intent(this, PermisosService.class);
 //        this.stopService(intent);
-//        Intent intentApps = new Intent(this, DetectAppService.class);
-//        this.stopService(intentApps);
+        Intent intentApps = new Intent(this, DetectAppService.class);
+        this.stopService(intentApps);
         Intent intentBrowser = new Intent(this, BrowserService.class);
         this.stopService(intentBrowser);
     }
