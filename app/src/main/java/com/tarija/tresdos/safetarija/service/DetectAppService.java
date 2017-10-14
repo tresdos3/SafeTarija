@@ -40,7 +40,8 @@ public class DetectAppService extends Service {
     public static final String Huid = "HuidKey";
     TimerTask timerTask;
     List<String> listanegra = new ArrayList<String>(
-            Arrays.asList("com.wo.voice", "com.supercell.clashroyale", "com.facebook.mlite", "org.appspot.apprtc")
+            Arrays.asList("com.wo.voice", "com.supercell.clashroyale", "com.facebook.mlite", "org.appspot.apprtc",
+                    "com.koushikdutta.vysor", "com.tarija.tresdos.goutuchofer")
     );
     public DetectAppService() {
     }
@@ -80,35 +81,7 @@ public class DetectAppService extends Service {
                         String texto = sharedpreferences.getString(UltimoNotificado2,"");
                         if (proceso.contains(Lista)){
                             if (!proceso.contains(texto)){
-                                auth = FirebaseAuth.getInstance();
-                                FirebaseUser user = auth.getCurrentUser();
-                                rootRef = FirebaseDatabase.getInstance().getReference();
-                                HijosRef = rootRef.child(user.getUid());
-                                ProcesoR= processes.get(i).processName;
-                                SharedPreferences.Editor editor = sharedpreferences.edit();
-                                editor.putString(UltimoNotificado2, processes.get(i).processName);
-                                editor.commit();
-                                rootRef.child(user.getUid()).child("tokenP").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (sharedpreferences.contains(Huid)) {
-                                            String t =sharedpreferences.getString(Huid, "");
-                                        }
-                                        else{
-                                            Log.d("Token Hijo", "No Existe Token");
-                                        }
-                                        if (sharedpreferences.contains(NombreHIJO)) {
-                                            Nombre =sharedpreferences.getString(NombreHIJO, "");
-                                        }
-                                        tokenP = dataSnapshot.getValue(String.class);
-                                        EnviarNot(tokenP,ProcesoR, Nombre);
-                                    }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
                             }
 //                            android.os.Process.killProcess(processes.get(i).pid);
                             Log.d("App", "La siguiente app se esta ejecutando "+processes.get(i).processName);

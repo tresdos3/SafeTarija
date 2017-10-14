@@ -85,8 +85,6 @@ public class PinActivity extends AppCompatActivity {
 
                     @Override
                     public void onPinChange(int pinLength, String intermediatePin) {
-                        MDToast mdToast = MDToast.makeText(getApplicationContext(), "Pin Actualizado", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS);
-                        mdToast.show();
                     }
                 });
             }
@@ -99,8 +97,6 @@ public class PinActivity extends AppCompatActivity {
 
             @Override
             public void onPinChange(int pinLength, String intermediatePin) {
-                MDToast mdToast = MDToast.makeText(getApplicationContext(), "Pin Actualizado", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS);
-                mdToast.show();
             }
         });
     }
