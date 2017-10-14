@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
+import com.tarija.tresdos.safetarija.service.ContactsService;
 import com.tarija.tresdos.safetarija.service.EmergencyService;
 import com.tarija.tresdos.safetarija.service.LocationService;
 import com.valdesekamdem.library.mdtoast.MDToast;
@@ -323,16 +324,16 @@ public class DashboardHActivity extends AppCompatActivity {
 //        startService(intent);
 //        Intent intentApps = new Intent(this, DetectAppService.class);
 //        startService(intentApps);
-//        Intent intentInternet = new Intent(this, ContactsService.class);
-//        startService(intentInternet);
+        Intent intentInternet = new Intent(this, ContactsService.class);
+        startService(intentInternet);
     }
     private void cerrarServicio(){
         Intent intentGeo = new Intent(this, LocationService.class);
         this.stopService(intentGeo);
         Intent intentEmer = new Intent(this, EmergencyService.class);
         this.stopService(intentEmer);
-//        Intent intentInternet = new Intent(this, ContactsService.class);
-//        this.stopService(intentInternet);
+        Intent intentInternet = new Intent(this, ContactsService.class);
+        this.stopService(intentInternet);
 //        Intent intent = new Intent(this, PermisosService.class);
 //        this.stopService(intent);
 //        Intent intentApps = new Intent(this, DetectAppService.class);

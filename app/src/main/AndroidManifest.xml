@@ -115,6 +115,10 @@
             android:name=".service.ContactsService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".service.BrowserService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
