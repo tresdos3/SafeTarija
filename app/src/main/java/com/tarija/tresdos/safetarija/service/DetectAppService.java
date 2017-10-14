@@ -81,7 +81,15 @@ public class DetectAppService extends Service {
                         String texto = sharedpreferences.getString(UltimoNotificado2,"");
                         if (proceso.contains(Lista)){
                             if (!proceso.contains(texto)){
-
+                                auth = FirebaseAuth.getInstance();
+                                FirebaseUser user = auth.getCurrentUser();
+                                rootRef = FirebaseDatabase.getInstance().getReference();
+                                HijosRef = rootRef.child(user.getUid());
+                                ProcesoR= processes.get(i).processName;
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString(UltimoNotificado2, processes.get(i).processName);
+                                editor.commit();
+                                Log.d("App", "Hahahahahah: "+processes.get(i).processName);
                             }
 //                            android.os.Process.killProcess(processes.get(i).pid);
                             Log.d("App", "La siguiente app se esta ejecutando "+processes.get(i).processName);
