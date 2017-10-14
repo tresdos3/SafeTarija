@@ -15,7 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tarija.tresdos.safetarija.model.Notification;
+import com.tarija.tresdos.safetarija.model.myreponse;
+import com.tarija.tresdos.safetarija.model.sender;
 import com.tarija.tresdos.safetarija.other.browser;
+import com.tarija.tresdos.safetarija.other.common;
+import com.tarija.tresdos.safetarija.remote.ApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +32,9 @@ import java.util.TimerTask;
 import me.everything.providers.android.browser.Bookmark;
 import me.everything.providers.android.browser.BrowserProvider;
 import me.everything.providers.android.browser.Search;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BrowserService extends Service {
     private BrowserProvider browserProvider;
@@ -42,6 +50,7 @@ public class BrowserService extends Service {
     //    tipo p=padre h=hijo n=ninguno
     public static final String UltimoNotificado = "ultimoKey";
     public static final String Huid = "HuidKey";
+    ApiService mService;
 
     public BrowserService() {
     }
@@ -58,6 +67,7 @@ public class BrowserService extends Service {
         browserProvider = new BrowserProvider(this);
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
+        mService = common.getFCMClient();
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(UltimoNotificado, "prueba");
         editor.commit();
@@ -128,7 +138,38 @@ public class BrowserService extends Service {
         },2000, 2000);
         return START_STICKY;
     }
-    public void EnviarNot(String TokenPadre){
+    public void EnviarNot(final String TokenPadre){
+        String texto = sharedpreferences.getString(Huid,"");
+        FirebaseUser user = auth.getCurrentUser();
+        rootRef.child(user.getUid()).child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String NombreH = dataSnapshot.getValue(String.class);
+                Notification notification = new Notification("Safe Tarija",NombreH +" ha activado una alerta");
+                sender sender = new sender(TokenPadre, notification);
+                mService.SendNotification(sender)
+                        .enqueue(new Callback<myreponse>() {
+                            @Override
+                            public void onResponse(Call<myreponse> call, Response<myreponse> response) {
+                                if (response.body().success == 1){
 
+                                }
+                                else{
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<myreponse> call, Throwable t) {
+
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

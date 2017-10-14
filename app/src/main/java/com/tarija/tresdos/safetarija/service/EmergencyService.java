@@ -147,7 +147,6 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
     }
     public void EnviarNot(final String TokenPadre){
         String texto = sharedpreferences.getString(Huid,"");
-
         FirebaseUser user = auth.getCurrentUser();
         rootRef.child(user.getUid()).child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
             @Override
