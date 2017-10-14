@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.tarija.tresdos.safetarija.other.PolicyManager;
+import com.tarija.tresdos.safetarija.service.BrowserService;
 import com.tarija.tresdos.safetarija.service.ContactsService;
 import com.tarija.tresdos.safetarija.service.EmergencyService;
 import com.tarija.tresdos.safetarija.service.LocationService;
@@ -316,8 +317,8 @@ public class DashboardHActivity extends AppCompatActivity {
     private void iniciarServicio(){
         Intent intentGeo = new Intent(this, LocationService.class);
         startService(intentGeo);
-//        Intent intentBrowser = new Intent(this, BrowserService.class);
-//        startService(intentBrowser);
+        Intent intentBrowser = new Intent(this, BrowserService.class);
+        startService(intentBrowser);
         Intent intentEmer = new Intent(this, EmergencyService.class);
         startService(intentEmer);
 //        Intent intent = new Intent(this, PermisosService.class);
@@ -338,8 +339,8 @@ public class DashboardHActivity extends AppCompatActivity {
 //        this.stopService(intent);
 //        Intent intentApps = new Intent(this, DetectAppService.class);
 //        this.stopService(intentApps);
-//        Intent intentBrowser = new Intent(this, BrowserService.class);
-//        this.stopService(intentBrowser);
+        Intent intentBrowser = new Intent(this, BrowserService.class);
+        this.stopService(intentBrowser);
     }
     private void Alerta(){
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)

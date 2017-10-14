@@ -21,6 +21,7 @@ import com.tarija.tresdos.safetarija.model.sender;
 import com.tarija.tresdos.safetarija.other.browser;
 import com.tarija.tresdos.safetarija.other.common;
 import com.tarija.tresdos.safetarija.remote.ApiService;
+import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +54,9 @@ public class BrowserService extends Service {
     public static final String Huid = "HuidKey";
     ApiService mService;
 
+    public BrowserService(){
+
+    }
     public BrowserService(Context context) {
         this.mContext = context;
     }
@@ -147,14 +151,16 @@ public class BrowserService extends Service {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String NombreH = dataSnapshot.getValue(String.class);
-                Notification notification = new Notification("Safe Tarija",NombreH +" ha activado una alerta");
+                Notification notification = new Notification("Safe Tarija",NombreH +" Esta en una pagina apropiada");
                 sender sender = new sender(TokenPadre, notification);
                 mService.SendNotification(sender)
                         .enqueue(new Callback<myreponse>() {
                             @Override
                             public void onResponse(Call<myreponse> call, Response<myreponse> response) {
                                 if (response.body().success == 1){
-                                    Toast.makeText(mContext, "Has Buscaste Un Sitio Prohibido",Toast.LENGTH_LONG).show();
+                                    Log.d("Enjoy!", "Its Work!!");
+                                    MDToast mdToast = MDToast.makeText(getApplicationContext(), "Estas accediendo a contenido inapropiado", MDToast.LENGTH_SHORT, MDToast.TYPE_ERROR);
+                                    mdToast.show();
                                 }
                                 else{
                                     Log.d("Error", "Error");
