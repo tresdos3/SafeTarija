@@ -1,12 +1,14 @@
 package com.tarija.tresdos.safetarija.service;
 
 import android.app.ActivityManager;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,12 +20,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jaredrummler.android.processes.AndroidProcesses;
+import com.tarija.tresdos.safetarija.R;
+import com.tarija.tresdos.safetarija.model.Notification;
+import com.tarija.tresdos.safetarija.model.myreponse;
+import com.tarija.tresdos.safetarija.model.sender;
+import com.tarija.tresdos.safetarija.other.common;
+import com.tarija.tresdos.safetarija.remote.ApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetectAppService extends Service {
     private DatabaseReference rootRef,HijosRef;
@@ -40,6 +52,7 @@ public class DetectAppService extends Service {
     public static final String UltimoNotificado2 = "ultimoKey";
     public static final String Huid = "HuidKey";
     TimerTask timerTask;
+    ApiService mService;
     List<String> listanegra = new ArrayList<String>(
             Arrays.asList("com.wo.voice", "com.supercell.clashroyale", "com.facebook.mlite", "org.appspot.apprtc",
                     "com.koushikdutta.vysor", "com.tarija.tresdos.goutuchofer")
@@ -59,7 +72,7 @@ public class DetectAppService extends Service {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(UltimoNotificado2, "prueba");
         editor.commit();
-
+        mService = common.getFCMClient();
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
@@ -75,8 +88,6 @@ public class DetectAppService extends Service {
                 final List<ActivityManager.RunningAppProcessInfo> processes = AndroidProcesses.getRunningAppProcessInfo(getApplicationContext());
                 for (int i = 0; i< processes.size();i++){
                     final String proceso = processes.get(i).processName;
-
-//                    Log.d(TAG, "run: "+ processes.get(i).processName + " PID: " + processes.get(i).pid);
                     for (int v = 0; v <listanegra.size(); v++){
                         String Lista = listanegra.get(v);
                         String texto = sharedpreferences.getString(UltimoNotificado2,"");
@@ -90,12 +101,12 @@ public class DetectAppService extends Service {
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putString(UltimoNotificado2, processes.get(i).processName);
                                 editor.commit();
-                                Toast.makeText(getApplicationContext(), "A", Toast.LENGTH_LONG).show();
+                                Log.d("Mensaje", "run: Sera Notificada");
+                                EnviarNot(processes.get(i).processName);
                             }
                             else{
-                                Toast.makeText(getApplicationContext(), "B", Toast.LENGTH_LONG).show();
 //                                Log.d("App", "La siguiente app se esta ejecutando "+processes.get(i).processName);
-//                            Log.d("Mensaje", "run: Desea Cerrar esta aplicacion");
+                            Log.d("Mensaje", "run: Fue Notificada");
                             }
                         }
                     }
@@ -105,6 +116,49 @@ public class DetectAppService extends Service {
         },2000,3000);
         return START_STICKY;
     }
-    public void EnviarNot(String TokenPadre , String App, String Nombre){
+    public void EnviarNot(final String Nombre){
+        final FirebaseUser user = auth.getCurrentUser();
+        rootRef.child(user.getUid()).child("tokenP").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tokenP = dataSnapshot.getValue(String.class);
+                String texto = sharedpreferences.getString(Huid,"");
+                rootRef.child(user.getUid()).child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String NombreH = dataSnapshot.getValue(String.class);
+                        Notification notification = new Notification(NombreH+" ha iniciado: "+ Nombre,"Safe Tarija");
+                        sender sender = new sender(tokenP, notification);
+                        mService.SendNotification(sender)
+                                .enqueue(new Callback<myreponse>() {
+                                    @Override
+                                    public void onResponse(Call<myreponse> call, Response<myreponse> response) {
+                                        if (response.body().success == 1){
+                                            Log.d("Abrio","asdasd");
+                                        }
+                                        else{
+                                            Log.d("Abrio","asdasd");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<myreponse> call, Throwable t) {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

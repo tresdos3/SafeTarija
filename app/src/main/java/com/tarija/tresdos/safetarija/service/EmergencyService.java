@@ -53,7 +53,6 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
     SharedPreferences sharedpreferences;
     public static final String mypreference = "mypref";
     public static final String Huid = "HuidKey";
-    public static final String UrlNoti = "http://138.197.27.208/hijoNotificacion/";
     public String tokenP;
     boolean isGPSEnable = false;
     boolean isNetworkEnable = false;
