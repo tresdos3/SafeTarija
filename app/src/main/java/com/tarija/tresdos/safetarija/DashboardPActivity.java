@@ -41,6 +41,7 @@ import com.tarija.tresdos.safetarija.model.sender;
 import com.tarija.tresdos.safetarija.other.ItemMenu;
 import com.tarija.tresdos.safetarija.other.common;
 import com.tarija.tresdos.safetarija.remote.ApiService;
+import com.tarija.tresdos.safetarija.service.AccessibilityService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
@@ -87,7 +88,6 @@ public class DashboardPActivity extends AppCompatActivity implements GoogleApiCl
         love_title = (TextView) findViewById(R.id.love_music);
         love_sub = (TextView) findViewById(R.id.love_Sub);
         profile = (CircleImageView) findViewById(R.id.profile);
-
         rootRef = FirebaseDatabase.getInstance().getReference();;
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
