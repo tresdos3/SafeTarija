@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -64,7 +65,7 @@ public class DetectAppService extends Service {
         rootRef = FirebaseDatabase.getInstance().getReference();
         HijosRef = rootRef.child(user.getUid());
     }
-
+    String lastAppPN = "";
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Timer timer = new Timer();
