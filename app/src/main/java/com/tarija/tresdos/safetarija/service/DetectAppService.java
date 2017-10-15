@@ -90,11 +90,13 @@ public class DetectAppService extends Service {
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putString(UltimoNotificado2, processes.get(i).processName);
                                 editor.commit();
-                                Log.d("App", "Hahahahahah: "+processes.get(i).processName);
+                                Toast.makeText(getApplicationContext(), "A", Toast.LENGTH_LONG).show();
                             }
-//                            android.os.Process.killProcess(processes.get(i).pid);
-                            Log.d("App", "La siguiente app se esta ejecutando "+processes.get(i).processName);
+                            else{
+                                Toast.makeText(getApplicationContext(), "B", Toast.LENGTH_LONG).show();
+//                                Log.d("App", "La siguiente app se esta ejecutando "+processes.get(i).processName);
 //                            Log.d("Mensaje", "run: Desea Cerrar esta aplicacion");
+                            }
                         }
                     }
                 }
