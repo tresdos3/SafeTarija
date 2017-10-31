@@ -41,7 +41,6 @@ import com.tarija.tresdos.safetarija.model.sender;
 import com.tarija.tresdos.safetarija.other.ItemMenu;
 import com.tarija.tresdos.safetarija.other.common;
 import com.tarija.tresdos.safetarija.remote.ApiService;
-import com.tarija.tresdos.safetarija.service.AccessibilityService;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
