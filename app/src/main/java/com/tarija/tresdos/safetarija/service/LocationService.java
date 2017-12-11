@@ -29,17 +29,12 @@ import java.util.Date;
 
 public class LocationService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, ILocationConstants, IPreferenceConstants {
 
-    private FirebaseAuth firebaseAuth;
     private static final String TAG = LocationService.class.getSimpleName();
     private long UPDATE_INTERVAL = 5000;  /* 15 secs */
     private long FASTEST_INTERVAL = 5000; /* 5 secs */
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
     protected Location mCurrentLocation;
-    private String mLatitudeLabel;
-    private String mLongitudeLabel;
-    private String mLastUpdateTimeLabel;
-    private String mDistance;
     protected String mLastUpdateTime;
     private Location oldLocation;
     private Location newLocation;
@@ -186,10 +181,10 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     /**
      * Removes location updates from the FusedLocationApi.
      */
-    protected void stopLocationUpdates() {
+        protected void stopLocationUpdates() {
 
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-    }
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
 
 
     @Override

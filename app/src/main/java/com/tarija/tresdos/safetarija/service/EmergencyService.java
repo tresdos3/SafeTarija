@@ -145,11 +145,12 @@ public class EmergencyService extends Service implements SensorEventListener, Lo
         Process.killProcess(Process.myPid());
     }
     public void EnviarNot(final String TokenPadre){
-        String texto = sharedpreferences.getString(Huid,"");
+        final String texto = sharedpreferences.getString(Huid,"");
         FirebaseUser user = auth.getCurrentUser();
         rootRef.child(user.getUid()).child("hijos").child(texto).child("nombre").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                HijosRef.child("hijos").child(texto).child("alerta").setValue("si");
                 String NombreH = dataSnapshot.getValue(String.class);
                 Notification notification = new Notification("Safe Tarija",NombreH +" ha activado una alerta");
                 sender sender = new sender(TokenPadre, notification);

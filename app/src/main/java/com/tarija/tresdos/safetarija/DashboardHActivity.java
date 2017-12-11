@@ -3,6 +3,7 @@ package com.tarija.tresdos.safetarija;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -145,7 +147,7 @@ public class DashboardHActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerta();
+                open();
             }
         });
         btnPattner.setOnClickListener(new View.OnClickListener() {
@@ -343,28 +345,52 @@ public class DashboardHActivity extends AppCompatActivity {
         Intent intentBrowser = new Intent(this, BrowserService.class);
         this.stopService(intentBrowser);
     }
-    private void Alerta(){
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Atencion...")
-                .setContentText("Que deseas hacer en este momento?...")
-                .setConfirmText("Cerrar Sesion")
-                .setCancelText("Quitar App")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
-                        startActivityForResult(i,2);
-                    }
-                })
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
-                        startActivityForResult(i,3);
-                    }
-                })
-                .show();
-    }
+//    private void Alerta(){
+//        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+//                .setTitleText("Atencion...")
+//                .setContentText("Que deseas hacer en este momento?...")
+//                .setConfirmText("Cerrar Sesion")
+//                .setCancelText("Quitar App")
+//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                        Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
+//                        startActivityForResult(i,2);
+//                    }
+//                })
+//                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                        Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
+//                        startActivityForResult(i,3);
+//                    }
+//                })
+//                .show();
+//    }
+public void open(){
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setMessage("Estas seguro, Tomaste una desicion?");
+            alertDialogBuilder.setPositiveButton("Cerrar Sesion",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+//                            Toast.makeText(DashboardHActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
+                            startActivityForResult(i,2);
+                        }
+                    });
+
+    alertDialogBuilder.setNegativeButton("Desinstalar",new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            Intent i = new Intent(DashboardHActivity.this, LogoutActivity.class);
+            startActivityForResult(i,3);
+        }
+    });
+
+    AlertDialog alertDialog = alertDialogBuilder.create();
+    alertDialog.show();
+}
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

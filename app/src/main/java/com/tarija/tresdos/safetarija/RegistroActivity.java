@@ -58,7 +58,10 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (hint.getText().toString().trim().length() != 0){
                     Hijos nuevo = new Hijos(hint.getText().toString(), "null","no","no");
-                    HijosRef.child("hijos").push().setValue(nuevo);
+                    String id = HijosRef.child("hijos").push().getKey();
+                    HijosRef.child("hijos/"+id).setValue(nuevo);
+                    HijosRef.child("hijos/"+id +"/ubicacion/latitud").setValue(0);
+                    HijosRef.child("hijos/"+id +"/ubicacion/longitud").setValue(0);
                     mdToast = MDToast.makeText(RegistroActivity.this, "Registrado correctamente", MDToast.LENGTH_LONG, mdToast.TYPE_SUCCESS);
                     mdToast.show();
                     finish();

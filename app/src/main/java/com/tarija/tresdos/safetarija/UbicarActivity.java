@@ -181,11 +181,11 @@ public class UbicarActivity extends AppCompatActivity implements GoogleApiClient
 //    Lista de tipo Object
     itemHijo Datos;
     private void prepareAlbums() {
-        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#f39c12"));
-        pDialog.setTitleText("Cargando Datos...");
-        pDialog.setCancelable(false);
-        pDialog.show();
+//        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#f39c12"));
+//        pDialog.setTitleText("Cargando Datos...");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         HijosRef.child("hijos").addValueEventListener(new ValueEventListener() {
             @Override
@@ -196,7 +196,7 @@ public class UbicarActivity extends AppCompatActivity implements GoogleApiClient
                     Lista_hijos.add(Datos);
                 }
                 adapter.notifyDataSetChanged();
-                pDialog.dismissWithAnimation();
+//                pDialog.dismissWithAnimation();
             }
 
             @Override
