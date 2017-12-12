@@ -67,11 +67,10 @@ public class SelecHijoActivity extends AppCompatActivity {
         btnSeleccionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                 MDToast mdToast = MDToast.makeText(getApplicationContext(), "Seleccionado: " + ListaSpiner.getText(), MDToast.LENGTH_SHORT, MDToast.TYPE_INFO);
                 mdToast.show();
                 int v = ListaSpiner.getSelectedIndex();
-                HijosRef.child("hijos").child(listaUID.get(v)).child("token").setValue(refreshedToken);
+                HijosRef.child("hijos").child(listaUID.get(v)).child("token").setValue(FirebaseInstanceId.getInstance().getToken());
                 HijosRef.child("hijos").child(listaUID.get(v)).child("estado").setValue("si");
                 HijosRef.child("hijos").child(listaUID.get(v)).child("alerta").setValue("no");
                 HijosRef.child("hijos").child(listaUID.get(v)).child("SDK").setValue(Build.VERSION.SDK_INT);

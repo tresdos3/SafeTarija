@@ -43,8 +43,9 @@ public class IntroHActivity extends AppIntro {
 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
-        MDToast mdToast = MDToast.makeText(getApplicationContext(), "Finalizado...", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS);
-        mdToast.show();
+        Intent i = new Intent(IntroHActivity.this, SelecHijoActivity.class);
+        finish();
+        startActivity(i);
     }
 
     @Override
