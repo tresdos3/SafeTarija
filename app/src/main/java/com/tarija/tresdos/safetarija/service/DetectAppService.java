@@ -54,8 +54,7 @@ public class DetectAppService extends Service {
     TimerTask timerTask;
     ApiService mService;
     List<String> listanegra = new ArrayList<String>(
-            Arrays.asList("com.wo.voice", "com.supercell.clashroyale", "com.facebook.mlite", "org.appspot.apprtc",
-                    "com.koushikdutta.vysor", "com.tarija.tresdos.goutuchofer")
+            Arrays.asList("com.wo.voice", "com.supercell.clashroyale", "org.appspot.apprtc", "com.tarija.tresdos.goutuchofer")
     );
     public DetectAppService() {
     }
